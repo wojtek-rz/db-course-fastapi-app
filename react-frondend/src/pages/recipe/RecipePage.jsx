@@ -1,12 +1,12 @@
 import {
     Container, Divider, Heading, LightMode, Text,
-    List, Box, ListIcon, Flex, Tag, Link,
+    List, Box, ListIcon, Flex, Tag,
     ListItem, UnorderedList, VStack, HStack, Button, Spinner, useToast
 } from "@chakra-ui/react";
 import { useState } from 'react';
 import { BiCircle, BiHeart, BiLinkExternal, BiTimer } from 'react-icons/bi';
 import { MdFastfood } from 'react-icons/md';
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, Link } from "react-router-dom";
 import { useDeleteRequest, useGetRequest, usePostRequest } from "../../hooks/useRequest.jsx"
 ;
 import {
@@ -38,7 +38,7 @@ function Tags({ tags, marginTop }) {
             {tags.map((tag) => {
                 return (
                     <Tag size={'md'} variant="solid" colorScheme="orange" key={tag.id}>
-                        <Link onClick={() => navigate(`/recipes?tags=${tag.replace(' ', '+')}`)}>
+                        <Link to={`/recipes?tags=${tag.name.replace(' ', '+')}`}>
                             {tag.name}
                         </Link>
                     </Tag>
