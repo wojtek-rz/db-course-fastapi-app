@@ -1,0 +1,38 @@
+version: '3'
+services:
+  db:
+    build: ./database
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - my-network
+    ports:
+      - "5432:5432"
+    # backend will wait till db is ready
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  backend:
+    build: ./fastapi-backend
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - my-network
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:
+
+networks:
+  my-network:

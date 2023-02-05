@@ -75,7 +75,8 @@ export default function IndexPage() {
                 justifyContent="space-between">
                 <Box display="flex" flex="1" marginRight="3" position="relative" alignItems="center">
                     <Box width={{ base: '100%', sm: '85%' }} zIndex="2" ml={{ base: '0', sm: '5%' }} mt="5%">
-                        <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                        <Link textDecoration="none" _hover={{ textDecoration: 'none' }}
+                            to="/">
                             <Image
                                 borderRadius="lg"
                                 src={
@@ -129,7 +130,7 @@ export default function IndexPage() {
             </Wrap>
 
             <VStack paddingTop="40px" spacing="2" alignItems="flex-start">
-                <Heading as="h2">Overwiev</Heading>
+                <Heading as="h2">Overview</Heading>
                 <Text as="p" fontSize="lg">
                     This website is a project for the course "Databases" at the
                     University of Warsaw. It is a simple recipe website that allows
@@ -137,8 +138,11 @@ export default function IndexPage() {
                     preferences. Users can also create their own recipes and share them
                     with the community.
 
-                    Data is stored in a PostgreSQL database and the backend is written
-                    in Python using the Flask framework. The frontend is written in
+                </Text>
+                <Text as="p" fontSize="lg">
+
+                Data is stored in a PostgreSQL database and the backend is written
+                    in Python using the FastApi framework. The frontend is written in
                     JavaScript using React and Chakra UI.
                 </Text>
             

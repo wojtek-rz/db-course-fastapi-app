@@ -7,11 +7,11 @@ from sql_app import settings
 from sql_app.ssh_tunnel import tunnel
 
 engine = create_engine('postgresql://{user}:{password}@{host}:{port}/{db}'.format(
-    user=settings.PG_USER,
-    password=settings.PG_PASSWORD,
-    host=settings.LOCALHOST if tunnel is not None else settings.DB_HOST,
-    port=tunnel.local_bind_port if tunnel is not None else settings.PG_PORT,
-    db=settings.DB,
+    user=settings.POSTGRES_USER,
+    password=settings.POSTGRES_PASSWORD,
+    host=settings.POSTGRESS_HOST,
+    port=settings.POSTGRES_PORT,
+    db=settings.POSTGRES_DB,
 ))
 
 Session = sessionmaker(bind=engine)

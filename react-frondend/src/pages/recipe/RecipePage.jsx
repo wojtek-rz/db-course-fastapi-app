@@ -127,7 +127,7 @@ export default function RecipePage(props) {
                 ))}
             </Box>
             <Divider mt={'7'} mb={'7'} />
-            <Link href={'/users/' + recipe.contributor_id} >
+            <Link to={'/users/' + recipe.contributor_id + "/"} >
                 <Heading as="h2" size={'lg'} mb={4} display="flex" gap={'2'} alignItems='center'>
                     <Box>Find out more about the author
                     </Box>

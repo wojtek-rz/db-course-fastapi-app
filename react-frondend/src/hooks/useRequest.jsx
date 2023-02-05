@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const base_url = "http://127.0.0.1:8000/api"
+const base_url = "/api"
 
 
 function configureConfig(prev_config = {}) {
@@ -25,6 +25,13 @@ function configureConfig(prev_config = {}) {
 
 export function useGetRequest(url, config = {}) {
     return axios.get(base_url + url, configureConfig(config)).then(res => res.data)
+        .catch(err => {
+            // if return code is 401 then remove token from local storage
+            if (err.response.status === 401) {
+                window.localStorage.removeItem('token')
+            }
+            throw err
+        })
 }
 
 export function usePostRequest(url, data) {

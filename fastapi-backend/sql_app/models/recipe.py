@@ -55,6 +55,3 @@ class RecipeTag(Base):
 
     recipe_id = Column(ForeignKey("recipes.id"), index=True)
     tag_id = Column(ForeignKey("tags.id"), index=True)
-
-    # recipe = relationship("Recipe", back_populates="tags")
-    tag = relationship("Tag")

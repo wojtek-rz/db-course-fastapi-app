@@ -5,6 +5,7 @@ import RecipeList from '../../components/RecipesList.jsx'
 import { useGetRequest } from '../../hooks/useRequest.jsx'
 
 import {useQuery} from '../../hooks/useQuery.jsx'
+import { useEffect } from 'react'
 
 function DynamicElements({ elements, colorScheme, handleNewElements }) {
 
@@ -76,6 +77,17 @@ function CustomForm({setRecipes}) {
             setLoading(false)
         })
     }
+
+    useEffect(() => {
+        setLoading(true)
+        useGetRequest('/recipes/', { params: formData }).then(recipes => {
+            setRecipes(recipes)
+            setLoading(false)
+        }).catch((err) => {
+            console.log(err)
+            setLoading(false)
+        })
+    }, [])
 
     return (
         <form onSubmit={handleSubmit} autoComplete="off">

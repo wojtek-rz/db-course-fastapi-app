@@ -18,16 +18,5 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 app.include_router(api_router.api_router, prefix="/api")
-
-
-app.mount("/assets", StaticFiles(directory="assets"), name="static files for frontend")
-
-templates = Jinja2Templates(directory="templates")
-
-
-# catch all possible paths, it's a single page application
-@app.get("/{full_path:path}")
-async def catch_all(request: Request, full_path: str):
-    print("full_path: "+full_path)
-    return templates.TemplateResponse("index.html", {"request": request})
