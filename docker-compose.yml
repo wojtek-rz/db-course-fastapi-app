@@ -14,7 +14,7 @@ services:
     # backend will wait till db is ready
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
-      interval: 10s
+      interval: 5s
       timeout: 5s
       retries: 5
   

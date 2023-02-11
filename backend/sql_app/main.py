@@ -3,8 +3,6 @@ from . import models
 from .database import create_tables
 from sql_app import api_router
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 
 create_tables(models)
 

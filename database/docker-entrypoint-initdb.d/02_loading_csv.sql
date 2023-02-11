@@ -19,16 +19,16 @@ delimiter ','
 csv header;
 
 copy recipe_ingredients
-from '/docker-entrypoint-initdb.d/recipe_ingredients.csv'
+from '/docker-entrypoint-initdb.d/recipes_ingredients.csv'
 delimiter ','
 csv header;
 
 copy recipe_tags
-from '/docker-entrypoint-initdb.d/recipe_tags.csv'
+from '/docker-entrypoint-initdb.d/recipes_tags.csv'
 delimiter ','
 csv header;
 
 copy recipe_steps
-from '/docker-entrypoint-initdb.d/recipe_steps.csv'
+from '/docker-entrypoint-initdb.d/recipes_steps.csv'
 delimiter ','
 csv header;

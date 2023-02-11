@@ -4,15 +4,15 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 from sql_app import settings
-from sql_app.ssh_tunnel import tunnel
 
 engine = create_engine('postgresql://{user}:{password}@{host}:{port}/{db}'.format(
     user=settings.POSTGRES_USER,
     password=settings.POSTGRES_PASSWORD,
-    host=settings.POSTGRESS_HOST,
+    host=settings.POSTGRES_HOST,
     port=settings.POSTGRES_PORT,
     db=settings.POSTGRES_DB,
 ))
+
 
 Session = sessionmaker(bind=engine)
 
