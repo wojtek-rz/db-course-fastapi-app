@@ -1,6 +1,4 @@
-# FastApi Template
-
-Created for Databases class @ MIMUW
+# FastApi backend
 
 ## Installation
 
@@ -11,7 +9,7 @@ Created for Databases class @ MIMUW
     ```
 3. Activate venv:
     ```bash
-    python3 source VENV_LOCATION/bin/activate
+    source VENV_LOCATION/bin/activate
     ```
 4. Install requirements:
     ```bash
@@ -27,10 +25,12 @@ Created for Databases class @ MIMUW
 1. Set environmental variables in the `.env` file.
 2. Mandatory fields:
    
-   - `PG_USER` - your login to postgresql
-   - `PG_PASSWORD` - your password to postgresql
-   - `SSH_USERNAME` - your login to the server
-   - [`SSH_PRIVATE_KEY_PATH` and `SSH_PRIVATE_KEY_PASSWORD`] or `SSH_PASSWORD`- credentials to the server
+    - `PORT` - port on which the application will be available
+    - `POSTGRES_HOST` - host of the database
+    - `POSTGRES_USER` - login to postgresql
+    - `POSTGRES_PASSWORD` - password to postgresql
+    - `POSTGRES_DB` - database name
+    - `POSTGRES_PORT` - port of the database
 
 ## Development
 
@@ -41,30 +41,37 @@ uvicorn --reload sql_app.main:app
 
 ## File structure
 
-- `crud.py` - database queries
-- `database.py` - database connection
-- `main.py` - app routing
-- `models.py` - models for the database
-- `schemas.py` - schemes for api
-- `settings.py` - .env and app variables
-- `ssh_tunnel.py` - connection to the ssh server
-
-
-You can create a more complex file structure like (more at https://fastapi.tiangolo.com/tutorial/bigger-applications/):
+```.
+├── __init__.py
+├── main.py         # start of the app
+├── api_router.py   # router for api endpoints
+├── database.py     # connection with database
+├── security.py     # passwords hashing and verifying users
+├── crud            # database queries
+│   ├── __init__.py
+│   ├── ingredients_crud.py
+│   ├── recipes_crud.py
+│   ├── tags_crud.py
+│   └── users_crud.py
+├── models          # models for the database
+│   ├── __init__.py
+│   ├── ingredient.py
+│   ├── recipe.py
+│   ├── tag.py
+│   └── user.py
+├── routes          # api endpoints
+│   ├── __init__.py
+│   ├── ingredients.py
+│   ├── login.py
+│   ├── recipes.py
+│   ├── tags.py
+│   └── users.py
+├── schemas         # api schemas
+│   ├── __init__.py
+│   ├── ingredient.py
+│   ├── recipe.py
+│   ├── tag.py
+│   ├── token.py
+│   └── user.py
+└── settings.py     # .env and app variables
 ```
-.
-├── app                  # "app" is a Python package
-│   ├── __init__.py      # this file makes "app" a "Python package"
-│   ├── main.py          # "main" module, e.g. import app.main
-│   ├── dependencies.py  # "dependencies" module, e.g. import app.dependencies
-│   └── routers          # "routers" is a "Python subpackage"
-│   │   ├── __init__.py  # makes "routers" a "Python subpackage"
-│   │   ├── items.py     # "items" submodule, e.g. import app.routers.items
-│   │   └── users.py     # "users" submodule, e.g. import app.routers.users
-│   └── internal         # "internal" is a "Python subpackage"
-│       ├── __init__.py  # makes "internal" a "Python subpackage"
-│       └── admin.py     # "admin" submodule, e.g. import app.internal.admin
-```
-
-but you need to manage python modules.
-
