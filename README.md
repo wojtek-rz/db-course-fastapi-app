@@ -7,7 +7,7 @@
 
 Project for "Databases" course at the University of Warsaw.
 
-## Live demo
+## [Live demo](https://recipe-app-static-frontend-jutkuzvhoq-lm.a.run.app)
 
 - [Frontend](https://recipe-app-static-frontend-jutkuzvhoq-lm.a.run.app)
 - [Backend docs](https://recipe-app-backend-jutkuzvhoq-lm.a.run.app/docs)
