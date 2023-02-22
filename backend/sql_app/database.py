@@ -5,13 +5,20 @@ from sqlalchemy.orm import sessionmaker
 
 from sql_app import settings
 
-engine = create_engine('postgresql://{user}:{password}@{host}:{port}/{db}'.format(
-    user=settings.POSTGRES_USER,
-    password=settings.POSTGRES_PASSWORD,
-    host=settings.POSTGRES_HOST,
-    port=settings.POSTGRES_PORT,
-    db=settings.POSTGRES_DB,
-))
+engine = create_engine(
+    'postgresql://{user}:{password}@{host}:{port}/{db}'.format(
+        user=settings.POSTGRES_USER,
+        password=settings.POSTGRES_PASSWORD,
+        host=settings.POSTGRES_HOST,
+        port=settings.POSTGRES_PORT,
+        db=settings.POSTGRES_DB,
+    ),      
+    pool_size=10,
+    max_overflow=2,
+    pool_recycle=300,
+    pool_pre_ping=True,
+    pool_use_lifo=True
+)
 
 
 Session = sessionmaker(bind=engine)

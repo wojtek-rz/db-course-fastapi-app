@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const base_url = "/api"
+// const base_url = "http://0.0.0.0:8000/api"
+const base_url = "https://recipe-app-backend-jutkuzvhoq-lm.a.run.app/api"
 
 
 function configureConfig(prev_config = {}) {

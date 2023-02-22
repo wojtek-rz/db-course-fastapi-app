@@ -9,8 +9,6 @@ services:
       - db_data:/var/lib/postgresql/data
     networks:
       - my-network
-    ports:
-      - "5432:5432"
     # backend will wait till db is ready
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
@@ -19,7 +17,7 @@ services:
       retries: 5
   
   backend:
-    build: ./fastapi-backend
+    build: ./backend
     restart: always
     env_file:
       - .env
@@ -27,9 +25,20 @@ services:
       - my-network
     ports:
       - "8000:8000"
+    environment:
+      - PORT=8000
     depends_on:
       db:
         condition: service_healthy
+  
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_started
 
 volumes:
   db_data:

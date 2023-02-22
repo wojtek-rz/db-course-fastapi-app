@@ -2,20 +2,20 @@ import {
     Container,
     Heading,
     Text,
-    Link,
     Button,
     FormControl,
     FormLabel,
     Input,
     Alert,
     AlertIcon,
-    useToast
+    useToast,
+    Box
 } from '@chakra-ui/react';
 import { useState } from "react";
-import { useAuth } from '../auth/useAuth';
-import {useNavigate} from "react-router-dom";
+import { useAuth } from '../hooks/useAuth';
+import { useNavigate, Link } from "react-router-dom";
 
-export default function LoginPage(){
+export default function LoginPage() {
     const { login } = useAuth()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -27,14 +27,14 @@ export default function LoginPage(){
         e.preventDefault();
 
         setLoading(true);
-        login({username: email, password}).then(e => {
+        login({ username: email, password }).then(e => {
             setLoading(false);
             navigate('/profile')
         }).catch(err => {
             setLoading(false);
             toast({
                 title: "An error occurred.",
-                description: JSON.stringify(error.response.data.detail),
+                description: JSON.stringify(err.response.data.detail),
                 status: "error",
             })
         })
@@ -47,7 +47,7 @@ export default function LoginPage(){
             mt={10}
         >
             <Heading mb={5}>Log In</Heading>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} id="userForm">
                 <FormControl id="email">
                     <FormLabel>Email address</FormLabel>
                     <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -56,12 +56,20 @@ export default function LoginPage(){
                     <FormLabel>Password</FormLabel>
                     <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </FormControl>
-                <Button mt={4} colorScheme="blue" type="submit" isLoading={loading}>
-                    Log In
-                </Button>
+                <Box mt={4} display="flex" justifyContent={'space-between'}>
+                    <Button colorScheme="blue" type="submit" isLoading={loading}>
+                        Log In
+                    </Button>
+                    <Button type="button" onClick={() => {
+                        setEmail("demo@demo.mail.com");
+                        setPassword("demo123password456");
+                    }}>
+                        Demo login
+                    </Button>
+                </Box>
             </form>
-            <Text mt={2}>
-                Need an account? <Link href="/register">Sign Up</Link>
+            <Text mt={4}>
+                Need an account? <Link to="/register">Sign Up</Link>
             </Text>
         </Container>
     )

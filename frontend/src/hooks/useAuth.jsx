@@ -1,7 +1,8 @@
-import { createContext, useContext, useMemo } from "react";
+import React, { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
 import axios from "axios"
+import { usePostRequest } from "./useRequest";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -15,9 +16,9 @@ export const AuthProvider = ({ children }) => {
         params.append("password", password)
 
         // send post request to get access token, requiest body should be x-www-form-urlencoded
-        const response = await axios.post('http://127.0.0.1:8000/api/login/access-token', params)
+        const data = await usePostRequest('/login/access-token', params)
 
-        setToken(response.data.access_token);
+        setToken(data.access_token);
         navigate("/");
     };
 

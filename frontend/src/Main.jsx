@@ -13,7 +13,7 @@ import RecipePage, { recipeLoader } from './pages/recipe/RecipePage.jsx';
 import TopUsersPage, { topUsersLoader } from './pages/users/TopUsersPage.jsx';
 import UserPage, { userLoader } from './pages/users/UserPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
-import { AuthProvider } from './auth/useAuth';
+import { AuthProvider } from './hooks/useAuth';
 import ProfilePage, { profileLoader } from './pages/users/ProfilePage.jsx';
 import IngredientsPage from './pages/IngredientsPage.jsx';
 import TagsPage from './pages/TagsPage.jsx';

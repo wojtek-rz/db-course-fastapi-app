@@ -27,21 +27,23 @@ function RecipeCard({ recipe, unlikeButton }) {
                 transitionDuration: '0.2s',
                 transitionTimingFunction: "ease-in-out"
             }}
-            display={'flex'} gap={4} alignItems={'center'}>
-            <Box width={'48'} color="blackAlpha.800" size={'md'} >
+            display={'flex'} flexDirection={{base: 'column', md: 'row'}} gap={{base: 6, md: 4}} alignItems={{base: 'start', md: 'center'}}>
+
+            <Box minW={'48'} color="blackAlpha.800" size={'md'}
+                display={'flex'} flexDirection={{base: 'row', md: 'column'}} gap={2} >
                 <Box display="flex" gap={2} alignItems={"center"}>
                     <BiTimer />
                     <Box><b>{recipe.minutes} minutes </b></Box>
                 </Box>
 
-                <Box mt={2} display="flex" gap={2} alignItems={"center"}>
+                <Box display="flex" gap={2} alignItems={"center"}>
 
                     <MdFastfood></MdFastfood>
                     <Box><b> {recipe.calorie_level} calorie level </b></Box>
                 </Box>
 
 
-                <Box mt={2} display="flex" gap={2} alignItems={"center"}>
+                <Box display="flex" gap={2} alignItems={"center"}>
                     <BiHeart />
                     <Box><b>{recipe.likes} likes </b></Box>
                 </Box>
@@ -73,7 +75,7 @@ function RecipeCard({ recipe, unlikeButton }) {
 export default function RecipesList({ recipes, title, unlikeButton }) {
 
     return (
-        <Box mb={10}>
+        <Box mb={5}>
             <Heading mb={4} size="lg">{title}</Heading>
             {recipes.length == 0 && <Text mt={4} color='blackAlpha.700'>No recipes found</Text>}
             <VStack spacing="2"

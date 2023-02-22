@@ -1,3 +1,4 @@
+import React from 'react'
 import { useRouteError } from 'react-router-dom';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';

@@ -4,11 +4,12 @@ import {
     ListItem, UnorderedList, VStack, HStack, Button, Spinner, useToast
 } from "@chakra-ui/react";
 import { useState } from 'react';
-import { BiCircle, BiHeart, BiLinkExternal, BiTimer } from 'react-icons/bi';
+import { BiCircle, BiHeart, BiTimer } from 'react-icons/bi';
+import {IoPersonCircle} from 'react-icons/io5'
 import { MdFastfood } from 'react-icons/md';
 import { useLoaderData, useNavigate, Link } from "react-router-dom";
 import { useDeleteRequest, useGetRequest, usePostRequest } from "../../hooks/useRequest.jsx"
-;
+    ;
 import {
     Table,
     Thead,
@@ -21,9 +22,10 @@ import {
     TableContainer,
 } from '@chakra-ui/react'
 import ActionButton from "../../components/ActionButton.jsx";
+import { ImProfile } from "react-icons/im";
 
 export async function recipeLoader({ params }) {
-    if (params.ingredient){
+    if (params.ingredient) {
         console.log(params.ingredient)
     }
     const recipe = await useGetRequest(`/recipes/${params.recipe_id}`)
@@ -50,24 +52,26 @@ function Tags({ tags, marginTop }) {
 
 export default function RecipePage(props) {
     const { recipe } = useLoaderData(props.id);
+    const navigate = useNavigate()
 
     return (
         <>
-            <HStack spacing={4} justifyContent="space-between">
+            <Flex gap={4} flexDirection={{base: 'column', md: 'row'}} justifyContent="space-between">
                 <Box>
                     <Heading>{recipe.title}</Heading>
                 </Box>
-                <Box display={'flex'} gap={4}>
+                <Box display={'flex'} flexDirection={{base: 'column', md: 'row'}} gap={4}>
+
                     <ActionButton asyncButtonAction={() => usePostRequest(`/recipes/${recipe.id}/likes`)} navigateTo={0}
-                    successMessage="Recipe liked" colorScheme={'blue'} size='lg' >
+                        successMessage="Recipe liked" colorScheme={'blue'} size='lg' >
                         Like recipe
                     </ActionButton>
                     <ActionButton asyncButtonAction={() => useDeleteRequest(`/recipes/${recipe.id}`)} navigateTo={'/profile'}
-                    successMessage="Recipe deleted" colorScheme={'red'} size='lg'>
+                        successMessage="Recipe deleted" colorScheme={'red'} size='lg'>
                         Delete recipe
                     </ActionButton>
                 </Box>
-            </HStack>
+            </Flex>
 
             <Flex gap="4" mt="2" >
 
@@ -110,7 +114,10 @@ export default function RecipePage(props) {
                         {recipe.ingredients.map((ingredient) => (
                             <Tr key={ingredient.name}>
                                 <Td>{ingredient.quantity}</Td>
-                                <Td>{ingredient.name}</Td>
+                                <Td  _hover={{ cursor: 'pointer', textDecoration: 'underline' }
+                                } onClick={() => {navigate(`/recipes?ingredients=${ingredient.name.replace(' ', '+')}`)}}>
+                                    {ingredient.name}
+                                </Td>
                             </Tr>
                         ))}
                     </Thead>
@@ -128,11 +135,13 @@ export default function RecipePage(props) {
             </Box>
             <Divider mt={'7'} mb={'7'} />
             <Link to={'/users/' + recipe.contributor_id + "/"} >
-                <Heading as="h2" size={'lg'} mb={4} display="flex" gap={'2'} alignItems='center'>
+                <Heading as="h2" size={'lg'} mb={4} display="flex" gap={'2'} alignItems='center' _hover={{
+                    textDecoration: 'underline',
+                }}>
                     <Box>Find out more about the author
                     </Box>
                     <Box>
-                        <BiLinkExternal />
+                        <IoPersonCircle />
                     </Box>
                 </Heading>
             </Link>
