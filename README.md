@@ -21,7 +21,8 @@ Project is fully dockerized and deployed. Frontend and backend is deployed on [G
 ### Prerequisites
 
 -   [Docker](https://docs.docker.com/install/)
--   [Node.js](https://nodejs.org/en/download/)
+-   [Node.js](https://nodejs.org/en/download/) (for development)
+-   [Python](https://www.python.org/) (for development)
 
 ### Running
 
